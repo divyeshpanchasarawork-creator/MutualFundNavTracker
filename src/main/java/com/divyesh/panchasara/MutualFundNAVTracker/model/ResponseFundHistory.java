@@ -1,17 +1,13 @@
 package com.divyesh.panchasara.MutualFundNAVTracker.model;
 
-import org.springframework.stereotype.Component;
-
 import java.time.LocalDate;
 import java.util.List;
 
-@Component
 public class ResponseFundHistory {
     private String fundCode;
     private String fundName;
-    private LocalDate fromDate;
-    private  LocalDate toDate;
-    private List<Double> navHistory;
+    private List<LocalDate> navDates;
+    private List<Double> navValues;
 
     public ResponseFundHistory() {
     }
@@ -32,27 +28,19 @@ public class ResponseFundHistory {
         this.fundName = fundName;
     }
 
-    public LocalDate getFromDate() {
-        return fromDate;
+    public List<LocalDate> getNavDates() {
+        return navDates;
     }
 
-    public void setFromDate(LocalDate fromDate) {
-        this.fromDate = fromDate;
+    public void setNavDates(List<LocalDate> navDates) {
+        this.navDates = navDates;
     }
 
-    public LocalDate getToDate() {
-        return toDate;
+    public List<Double> getNavValues() {
+        return navValues;
     }
 
-    public void setToDate(LocalDate toDate) {
-        this.toDate = toDate;
-    }
-
-    public List<Double> getNavHistory() {
-        return navHistory;
-    }
-
-    public void setNavHistory(List<Double> navHistory) {
-        this.navHistory = navHistory;
+    public void setNavValues(List<Double> navValues) {
+        this.navValues = navValues;
     }
 }

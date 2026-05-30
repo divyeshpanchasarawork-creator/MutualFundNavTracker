@@ -6,7 +6,7 @@ import jakarta.persistence.IdClass;
 import java.time.LocalDate;
 
 @Entity
-@IdClass(FundId.class) // Links the composite key class
+@IdClass(FundId.class)
 public class FundEntity {
 
     @Id

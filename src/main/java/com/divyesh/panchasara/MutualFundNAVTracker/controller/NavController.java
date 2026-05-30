@@ -14,10 +14,10 @@ import java.time.LocalDate;
 @RequestMapping("/funds")
 public class NavController {
 
-    private final NavService navService;
+    private final NavService navServiceImpl;
 
-    public NavController(NavService navService) {
-        this.navService = navService;
+    public NavController(NavService navServiceImpl) {
+        this.navServiceImpl = navServiceImpl;
     }
 
     @GetMapping("/{fundCode}/latest-nav")
@@ -25,7 +25,8 @@ public class NavController {
             @PathVariable String fundCode,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date
             ) {
-        ResponseFund responseFund = navService.getLatest(fundCode, date);
+        ResponseFund responseFund = navServiceImpl.getNavOfDate(fundCode, date);
+        if (responseFund == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(responseFund);
     }
     
@@ -35,17 +36,19 @@ public class NavController {
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fromDate,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate toDate
     ) {
-        ResponseFundHistory responseFundHistory = navService.getHistory(fundCode, fromDate, toDate);
+        ResponseFundHistory responseFundHistory = navServiceImpl.getHistory(fundCode, fromDate, toDate);
+        if (responseFundHistory == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(responseFundHistory);
     }
 
     @GetMapping("/{fundCode}/returns")
     public ResponseEntity<ResponseFundReturns> getReturns(
             @PathVariable String fundCode,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fromDate,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate toDate
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate beforeDate,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate afterDate
     ) {
-        ResponseFundReturns returns = navService.getReturns(fundCode, fromDate, toDate);
+        ResponseFundReturns returns = navServiceImpl.getReturns(fundCode, beforeDate, afterDate);
+        if (returns == null) return  ResponseEntity.badRequest().build();
         return ResponseEntity.ok(returns);
     }
 }

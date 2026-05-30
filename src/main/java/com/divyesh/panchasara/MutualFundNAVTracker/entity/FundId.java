@@ -9,7 +9,6 @@ public class FundId implements Serializable {
     private String fundCode;
     private LocalDate navDate;
 
-    // Default constructor
     public FundId() {}
 
     public FundId(String fundCode, LocalDate navDate) {

@@ -1,8 +1,6 @@
 package com.divyesh.panchasara.MutualFundNAVTracker.model;
 
-import org.springframework.stereotype.Component;
 
-@Component
 public class ResponseFundReturns {
     private String fundCode;
     private String fundName;
